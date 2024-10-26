@@ -22,17 +22,26 @@ class RegisterCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
             'full_name' => [
                 'required',
                 'string',
                 'regex:/^\S+ \S+$/',
             ],
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|unique:users,phone',
+            'phone' => [
+                'required',
+                'unique:users,phone',
+                // 'regex:/^(07|01)\d{8}$/',
+            ],
             'password' => [
                 'required',
+                'string',
+                'min:6',
                 'same:confirmPassword',
+                'regex:/[A-Z]/',
+                'regex:/[a-z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*?&#]/'
             ],
             'confirmPassword' => [
                 'required',
@@ -45,6 +54,8 @@ class RegisterCustomerRequest extends FormRequest
         return [
             'full_name.required' => 'Full name required',
             'full_name.regex' => 'Full name must be in first and last name order',
+            'password.regex' => 'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character',
+
         ];
     }
 }

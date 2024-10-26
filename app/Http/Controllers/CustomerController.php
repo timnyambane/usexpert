@@ -29,7 +29,6 @@ class CustomerController extends Controller
 
         try {
             User::create([
-                'title' => $data['title'],
                 'first_name' => $firstName,
                 'last_name' => $lastName,
                 'email' => $data['email'],

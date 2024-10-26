@@ -3,7 +3,6 @@ import { Head, useForm } from "@inertiajs/vue3";
 import Authenticated from "@/layouts/Authenticated.vue";
 import { ref } from "vue";
 
-const titles = ref(["Mr.", "Mrs.", "Miss.", "Ms.", "Mx."]);
 const loading = ref(false);
 
 defineOptions({
@@ -21,7 +20,13 @@ const customer = useForm({
 
 const formatPhoneNumber = (phone) => {
     if (!phone) return;
-    return phone.replace(/[+()\s-]/g, "");
+    phone = phone.replace(/[+()\s-]/g, "");
+
+    if (!phone.startsWith("254")) {
+        phone = `254${phone}`;
+    }
+
+    return phone.length === 12 ? phone : phone.slice(0, 12);
 };
 
 const submitForm = async () => {
@@ -46,7 +51,7 @@ const submitForm = async () => {
 <template>
     <Head title="Register as Customer" />
     <div
-        class="flex flex-col items-center justify-center mt-10 px-[5%] w-[50%] mx-auto"
+        class="flex flex-col items-center justify-center mt-10 px-[5%] w-[40%] mx-auto"
     >
         <h1 class="font-black text-4xl my-4 text-center">
             Register as Customer
@@ -56,27 +61,12 @@ const submitForm = async () => {
             class="w-full flex flex-col"
             action=""
         >
-            <div class="grid grid-cols-2 gap-2 mx-10 mt-4">
+            <div class="grid grid-cols-1 gap-2 mx-10 mt-4">
                 <div class="m-1 flex flex-col gap-y-4">
                     <div>
-                        <IconField>
-                            <InputIcon class="pi pi-user" />
-                            <Select
-                                :options="titles"
-                                placeholder="Select a Title"
-                                class="w-full py-1"
-                                v-model="customer.title"
-                            />
-                        </IconField>
-                        <p
-                            v-if="customer.errors.title"
-                            class="text-red-500 text-sm"
+                        <label for="" class="font-semibold ml-1"
+                            >Full Names</label
                         >
-                            {{ customer.errors.title }}
-                        </p>
-                    </div>
-
-                    <div>
                         <IconField>
                             <InputIcon class="pi pi-user" />
                             <InputText
@@ -97,6 +87,7 @@ const submitForm = async () => {
                     </div>
 
                     <div>
+                        <label for="" class="font-semibold ml-1">E-mail</label>
                         <IconField>
                             <InputIcon class="pi pi-envelope" />
                             <InputText
@@ -117,15 +108,18 @@ const submitForm = async () => {
                 </div>
 
                 <div class="m-1 flex flex-col gap-y-4">
-                    <div>
+                    <div class="phone">
+                        <label for="" class="font-semibold ml-1"
+                            >Phone Number</label
+                        >
                         <IconField>
                             <InputIcon class="pi pi-phone" />
-                            <InputMask
+                            <InputText
                                 v-model="customer.phone"
-                                mask="(+254) 799-999-999"
-                                placeholder="(+254) 712-345-678"
+                                placeholder="254712345678"
                                 class="w-full"
                                 type="tel"
+                                size="large"
                             />
                         </IconField>
                         <p
@@ -137,6 +131,9 @@ const submitForm = async () => {
                     </div>
 
                     <div>
+                        <label for="" class="font-semibold ml-1"
+                            >Password</label
+                        >
                         <IconField>
                             <InputIcon class="pi pi-lock" />
                             <InputText
@@ -156,6 +153,9 @@ const submitForm = async () => {
                     </div>
 
                     <div>
+                        <label for="" class="font-semibold ml-1"
+                            >Confirm Password</label
+                        >
                         <IconField>
                             <InputIcon class="pi pi-lock" />
                             <InputText
