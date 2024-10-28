@@ -3,7 +3,9 @@ import { Head, useForm } from "@inertiajs/vue3";
 import Authenticated from "@/layouts/Authenticated.vue";
 import { ref } from "vue";
 
-const loading = ref(false);
+const props = defineProps({
+    errors: Object,
+});
 
 defineOptions({
     layout: Authenticated,
@@ -26,25 +28,12 @@ const formatPhoneNumber = (phone) => {
         phone = `254${phone}`;
     }
 
-    return phone.length === 12 ? phone : phone.slice(0, 12);
+    return phone;
 };
 
-const submitForm = async () => {
-    loading.value = true;
+const registerCustomer = async () => {
     customer.phone = formatPhoneNumber(customer.phone);
-    await customer.post("/register/customer", {
-        onSuccess: () => {
-            console.log("Success");
-            loading.value = false;
-        },
-        onError: (response) => {
-            console.log("Error response:", response);
-            loading.value = false;
-        },
-        headers: {
-            Accept: "application/json",
-        },
-    });
+    await customer.post(route("post-register-customer"));
 };
 </script>
 
@@ -57,7 +46,7 @@ const submitForm = async () => {
             Register as Customer
         </h1>
         <form
-            @submit.prevent="submitForm"
+            @submit.prevent="registerCustomer"
             class="w-full flex flex-col"
             action=""
         >
@@ -181,7 +170,7 @@ const submitForm = async () => {
                     type="submit"
                     label="Create Account"
                     class="px-6 py-2"
-                    :loading="loading"
+                    :loading="customer.processing"
                     iconPos="right"
                 />
             </div>

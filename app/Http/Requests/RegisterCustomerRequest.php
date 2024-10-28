@@ -31,7 +31,7 @@ class RegisterCustomerRequest extends FormRequest
             'phone' => [
                 'required',
                 'unique:users,phone',
-                // 'regex:/^(07|01)\d{8}$/',
+                'regex:/^\d{12}$/'
             ],
             'password' => [
                 'required',
