@@ -1,7 +1,6 @@
 <script setup>
 import { Head, useForm, Link } from "@inertiajs/vue3";
 import Authenticated from "@/layouts/Authenticated.vue";
-import { ref } from "vue";
 
 const props = defineProps({
     errors: Object,
@@ -29,14 +28,16 @@ const login = async () => {
             <h1 class="font-black text-4xl my-4 text-center">Login</h1>
             <div class="mb-4">
                 <label class="ml-2 font-semibold" for="email">E-mail</label>
-                <InputText
-                    id="email"
-                    placeholder="example@email.com"
-                    v-model="user.email"
-                    type="email"
-                    size="large"
-                    class="w-full mt-1"
-                />
+                <IconField>
+                    <InputIcon class="pi pi-envelope" />
+                    <InputText
+                        placeholder="E-mail"
+                        class="w-full"
+                        size="large"
+                        type="email"
+                        v-model="user.email"
+                    />
+                </IconField>
                 <p v-if="user.errors.email" class="text-red-500 text-sm">
                     {{ user.errors.email }}
                 </p>
@@ -45,14 +46,16 @@ const login = async () => {
                 <label class="ml-2 font-semibold" for="password"
                     >Password</label
                 >
-                <InputText
-                    id="password"
-                    placeholder="********"
-                    v-model="user.password"
-                    type="password"
-                    class="w-full"
-                    size="large"
-                />
+                <IconField>
+                    <InputIcon class="pi pi-lock" />
+                    <InputText
+                        placeholder="Password"
+                        class="w-full"
+                        size="large"
+                        type="password"
+                        v-model="user.password"
+                    />
+                </IconField>
                 <p v-if="user.errors.password" class="text-red-500 text-sm">
                     {{ user.errors.password }}
                 </p>

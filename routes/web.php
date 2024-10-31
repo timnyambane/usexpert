@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\BusinessRegisterController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailCheckController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,8 +28,12 @@ Route::middleware('guest')->group(function () {
         return Inertia::render('Login');
     })->name('forgot-pass');
 
-    Route::get('register/customer', [CustomerController::class, 'show'])->name('show-register-customer');
-    Route::post('register/customer', [CustomerController::class, 'register'])->name('post-register-customer');
+    Route::get('register/customer', [CustomerRegisterController::class, 'show'])->name('show-register-customer');
+    Route::post('register/customer', [CustomerRegisterController::class, 'register'])->name('post-register-customer');
+    Route::post('check-email', [EmailCheckController::class, 'checkEmail'])->name('check-email');
+    Route::post('validate-personal', [BusinessRegisterController::class, 'validatePersonalDetails'])->name('validate-personal');
+
+
 });
 
 Route::middleware('auth')->group(function () {

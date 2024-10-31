@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <nav class="flex items-center justify-between py-2 px-[5%] bg-primary-50">
+    <nav class="flex items-center justify-between py-2 px-[5%] bg-gray-50">
         <div class="logo">
             <Link :href="route('home')">
                 <img

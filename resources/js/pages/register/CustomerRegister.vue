@@ -20,21 +20,12 @@ const customer = useForm({
     phone: null,
 });
 
-const formatPhoneNumber = (phone) => {
-    if (!phone) return;
-    phone = phone.replace(/[+()\s-]/g, "");
-
-    if (!phone.startsWith("254")) {
-        phone = `254${phone}`;
-    }
-
-    return phone;
-};
-
-const registerCustomer = async () => {
-    customer.phone = formatPhoneNumber(customer.phone);
-    await customer.post(route("post-register-customer"));
-};
+async function registerCustomer() {
+    await customer.post(route("post-register-customer"), {
+        onSuccess: () => {},
+        onError: () => {},
+    });
+}
 </script>
 
 <template>
@@ -50,7 +41,7 @@ const registerCustomer = async () => {
             class="w-full flex flex-col"
             action=""
         >
-            <div class="grid grid-cols-1 gap-2 mx-10 mt-4">
+            <div class="flex flex-col gap-2 mx-10 mt-4">
                 <div class="m-1 flex flex-col gap-y-4">
                     <div>
                         <label for="" class="font-semibold ml-1"

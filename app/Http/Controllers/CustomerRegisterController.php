@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class CustomerController extends Controller
+class CustomerRegisterController extends Controller
 {
     public function show(): Response
     {

@@ -26,6 +26,7 @@ import InputIcon from "primevue/inputicon";
 import Select from "primevue/select";
 import InputNumber from "primevue/inputnumber";
 import InputMask from "primevue/inputmask";
+import MultiSelect from "primevue/multiselect";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -60,6 +61,7 @@ createInertiaApp({
             .component("Select", Select)
             .component("InputNumber", InputNumber)
             .component("InputMask", InputMask)
+            .component("MultiSelect", MultiSelect)
 
             .mount(el);
     },
