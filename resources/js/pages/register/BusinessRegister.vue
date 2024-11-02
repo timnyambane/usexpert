@@ -1,11 +1,13 @@
 <script setup>
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, useForm, usePage } from "@inertiajs/vue3";
 import Authenticated from "@/layouts/Authenticated.vue";
 import { ref } from "vue";
 
 defineOptions({
     layout: Authenticated,
 });
+
+const locations = usePage().props.locations;
 
 const personal = useForm({
     full_name: null,
@@ -28,6 +30,14 @@ async function checkPersonalDetais(activateCallback) {
     await personal.post(route("validate-personal"), {
         onSuccess: () => {
             activateCallback(2);
+        },
+        onError: () => {},
+    });
+}
+async function checkBusinessDetais(activateCallback) {
+    await business.post(route("validate-business"), {
+        onSuccess: () => {
+            activateCallback(3);
         },
         onError: () => {},
     });
@@ -147,7 +157,7 @@ async function checkPersonalDetais(activateCallback) {
                                         size="large"
                                         v-model="personal.full_name"
                                         type="text"
-                                        name="name"
+                                        name="full_name"
                                     />
                                 </IconField>
                                 <p
@@ -195,7 +205,7 @@ async function checkPersonalDetais(activateCallback) {
                                     />
                                 </IconField>
                                 <p
-                                    v-if="personal.phone"
+                                    v-if="personal.errors.phone"
                                     class="text-red-500 text-sm"
                                 >
                                     {{ personal.errors.phone }}
@@ -299,8 +309,9 @@ async function checkPersonalDetais(activateCallback) {
                                             class="fa-solid fa-location-dot"
                                         />
                                         <Select
-                                            v-model="business.errors.location"
-                                            optionLabel="location"
+                                            v-model="business.location"
+                                            optionLabel="town"
+                                            :options="locations"
                                             placeholder="Select your location"
                                             class="w-full py-1"
                                             size="large"
@@ -312,7 +323,7 @@ async function checkPersonalDetais(activateCallback) {
                                         v-if="business.errors.location"
                                         class="text-red-500 text-sm"
                                     >
-                                        {{ business.location }}
+                                        {{ business.errors.location }}
                                     </p>
                                 </div>
                             </div>
@@ -381,7 +392,7 @@ async function checkPersonalDetais(activateCallback) {
                                 label="Next"
                                 icon="pi pi-arrow-right"
                                 iconPos="right"
-                                @click="activateCallback(3)"
+                                @click="checkBusinessDetais(activateCallback)"
                             />
                         </div>
                     </div>

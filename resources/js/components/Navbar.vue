@@ -1,22 +1,45 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 
 const props = defineProps({
     user: Object,
 });
+
+const { url } = usePage();
 </script>
 
 <template>
-    <nav class="flex items-center justify-between py-2 px-[5%] bg-gray-50">
-        <div class="logo">
+    <nav class="flex items-center justify-between py-2 px-[5%] bg-blue-50">
+        <div class="flex-1 justify-start">
             <Link :href="route('home')">
                 <img
                     src="https://thelocalpro.com.au/_nuxt/img/lp-logo.2219ddf.png"
                     alt="Logo"
                     class="h-8"
-            /></Link>
+                />
+            </Link>
         </div>
-        <div class="flex items-center gap-x-6">
+
+        <div class="flex items-center justify-center flex-1 gap-6 mx-4">
+            <Link
+                :href="route('show-register-customer')"
+                :class="{
+                    'text-primary-400': url === route('show-register-customer'),
+                }"
+            >
+                Create Account
+            </Link>
+            <Link
+                :href="route('show-register-business')"
+                :class="{
+                    'text-primary-400': url === route('show-register-business'),
+                }"
+            >
+                Register your Business
+            </Link>
+        </div>
+
+        <div class="flex items-center gap-x-6 flex-1 justify-end">
             <Button
                 as="a"
                 href="tel:254706783789"

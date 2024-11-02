@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterBusinessRequest;
 use App\Http\Requests\RegisterCustomerRequest;
 use Inertia\Inertia;
 use Illuminate\Http\JsonResponse;
@@ -18,8 +19,9 @@ class BusinessRegisterController extends Controller
         session()->flash('success', 'Your personal details have been successfully validated.');
     }
 
-    public function validateBusinessDetails(Request $request)
+    public function validateBusinessDetails(RegisterBusinessRequest $request)
     {
-
+        $data = $request->validated();
+        session()->flash('success', 'Your personal details have been successfully validated.');
     }
 }

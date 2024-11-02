@@ -30,8 +30,8 @@ Route::middleware('guest')->group(function () {
 
     Route::get('register/customer', [CustomerRegisterController::class, 'show'])->name('show-register-customer');
     Route::post('register/customer', [CustomerRegisterController::class, 'register'])->name('post-register-customer');
-    Route::post('check-email', [EmailCheckController::class, 'checkEmail'])->name('check-email');
     Route::post('validate-personal', [BusinessRegisterController::class, 'validatePersonalDetails'])->name('validate-personal');
+    Route::post('validate-business', [BusinessRegisterController::class, 'validateBusinessDetails'])->name('validate-business');
 
 
 });
