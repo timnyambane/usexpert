@@ -50,12 +50,12 @@ async function registerCustomer() {
                         <IconField>
                             <InputIcon class="pi pi-user" />
                             <InputText
-                                placeholder="Full Names"
+                                placeholder="Full Name"
                                 class="w-full"
                                 size="large"
                                 v-model="customer.full_name"
                                 type="text"
-                                name="name"
+                                name="first_last_name"
                             />
                         </IconField>
                         <p

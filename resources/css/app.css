@@ -9,16 +9,16 @@
 }
 
 :root {
-    --p-primary-50: #e1f2ff; /* Very Light Tint */
-    --p-primary-100: #b2e0ff; /* Light Tint */
-    --p-primary-200: #80c8ff; /* Soft Tint */
-    --p-primary-300: #4dafff; /* Moderate Tint */
-    --p-primary-400: #3b82f6; /* Base Color */
-    --p-primary-500: #007bff; /* Slightly Darker Tint */
-    --p-primary-600: #0066d4; /* Darker Shade */
-    --p-primary-700: #005bb1; /* Deeper Shade */
-    --p-primary-800: #004a8a; /* Even Darker Shade */
-    --p-primary-900: #003366; /* Very Dark Shade */
+    --p-primary-50: #e1f2ff;
+    --p-primary-100: #b2e0ff;
+    --p-primary-200: #80c8ff;
+    --p-primary-300: #4dafff;
+    --p-primary-400: #3b82f6;
+    --p-primary-500: #007bff;
+    --p-primary-600: #0066d4;
+    --p-primary-700: #005bb1;
+    --p-primary-800: #004a8a;
+    --p-primary-900: #003366;
 
     --p-surface-0: #ffffff;
     --p-surface-50: #fafafa;

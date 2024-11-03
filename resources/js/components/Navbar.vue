@@ -22,6 +22,7 @@ const { url } = usePage();
 
         <div class="flex items-center justify-center flex-1 gap-6 mx-4">
             <Link
+                v-if="!props.user"
                 :href="route('show-register-customer')"
                 :class="{
                     'text-primary-400': url === route('show-register-customer'),
@@ -30,12 +31,13 @@ const { url } = usePage();
                 Create Account
             </Link>
             <Link
+                v-if="!props.user"
                 :href="route('show-register-business')"
                 :class="{
                     'text-primary-400': url === route('show-register-business'),
                 }"
             >
-                Register your Business
+                Register Business
             </Link>
         </div>
 

@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\LocationResource;
 use App\Models\Location;
+use App\Models\Service;
+use App\Models\WorkCategory;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -40,7 +43,9 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user()
             ],
-            'locations' => Location::all()
+            'locations' => Location::orderBy('town')->get(),
+            'work_categories' => WorkCategory::orderBy('name')->get(),
+            'services' => Service::orderBy('name')->get(),
         ]);
     }
 }

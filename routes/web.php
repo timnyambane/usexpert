@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\BusinessRegisterController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EmailCheckController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;

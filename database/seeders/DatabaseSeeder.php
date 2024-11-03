@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(LocationSeeder::class);
+        $this->call(WorkCategorySeeder::class);
     }
 }
