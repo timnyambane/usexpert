@@ -1,14 +1,13 @@
 <script setup>
 import { Head, useForm, usePage } from "@inertiajs/vue3";
 import Authenticated from "@/layouts/Authenticated.vue";
-import { ref } from "vue";
+import { ref, watch, computed } from "vue";
 
 defineOptions({
     layout: Authenticated,
 });
 
-const locations = usePage().props.locations;
-const work_categories = usePage().props.work_categories;
+const { locations, work_categories, services } = usePage().props;
 
 const personal = useForm({
     full_name: null,
@@ -24,6 +23,22 @@ const business = useForm({
     work_category: null,
     services: null,
 });
+
+const filteredServices = computed(() => {
+    if (!business.work_category) return [];
+    return services.filter(
+        (service) => service.work_category_id === business.work_category.id
+    );
+});
+
+watch(
+    () => business.work_category,
+    (newValue) => {
+        if (!newValue) {
+            business.services = [];
+        }
+    }
+);
 
 const activeStep = ref(1);
 
@@ -53,33 +68,35 @@ async function checkBusinessDetais(activateCallback) {
         <Stepper v-model:value="activeStep" class="mt-4 w-[50%]">
             <div class="flex items-center justify-between gap-4 px-[10%]">
                 <div class="personal flex items-center justify-center gap-2">
-                    <i
-                        :class="[
-                            'fa-solid border p-2.5 rounded-full',
-                            activeStep > 1 ? 'bg-primary-500 text-white' : '',
-                            activeStep == 1 ? 'fa-user' : 'fa-check',
-                        ]"
-                    ></i>
+                    <Icon
+                        :icon="
+                            activeStep === 1
+                                ? 'heroicons-user'
+                                : activeStep > 1
+                                ? 'heroicons-check-circle-solid'
+                                : ''
+                        "
+                        :class="
+                            activeStep === 1
+                                ? 'text-black'
+                                : activeStep > 1
+                                ? 'text-primary-400'
+                                : ''
+                        "
+                        height="24"
+                    />
 
                     Personal
                 </div>
                 <Divider />
                 <div class="business flex items-center justify-center gap-2">
-                    <i
-                        :class="[
-                            'fa-solid border p-2.5 rounded-full',
-                            activeStep > 2 ? 'bg-primary-500 text-white' : '',
-                            activeStep <= 2 ? 'fa-briefcase' : 'fa-check',
-                        ]"
-                    ></i>
+                    <Icon icon="heroicons-briefcase" height="24" />
                     Business
                 </div>
                 <Divider />
                 <div class="payment flex items-center justify-center gap-2">
-                    <i
-                        class="fa-solid fa-credit-card border p-2.5 rounded-full"
-                    ></i
-                    >Payment
+                    <Icon icon="heroicons-currency-dollar" height="24" />
+                    Payment
                 </div>
             </div>
             <StepPanels>
@@ -224,9 +241,7 @@ async function checkBusinessDetais(activateCallback) {
                                         >Business Name</label
                                     >
                                     <IconField>
-                                        <InputIcon
-                                            class="fa-solid fa-briefcase"
-                                        />
+                                        <InputIcon class="pi pi-briefcase" />
                                         <InputText
                                             placeholder="Business Name"
                                             class="w-full"
@@ -306,7 +321,8 @@ async function checkBusinessDetais(activateCallback) {
                                         <InputIcon class="fa-solid fa-list" />
                                         <MultiSelect
                                             v-model="business.services"
-                                            optionLabel="services"
+                                            optionLabel="name"
+                                            :options="filteredServices"
                                             placeholder="Select all services"
                                             class="w-full py-1"
                                             size="large"
@@ -335,6 +351,7 @@ async function checkBusinessDetais(activateCallback) {
                                 icon="pi pi-arrow-right"
                                 iconPos="right"
                                 @click="checkBusinessDetais(activateCallback)"
+                                :loading="business.processing"
                             />
                         </div>
                     </div>

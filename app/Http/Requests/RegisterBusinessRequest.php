@@ -32,6 +32,8 @@ class RegisterBusinessRequest extends FormRequest
             ],
             'work_category' => [
                 'required',
+            ],
+            'work_category.id' => [
                 Rule::exists('work_categories', 'id')
             ],
             'services' => [

@@ -6,6 +6,8 @@ import PrimeVue from "primevue/config";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import "primeicons/primeicons.css";
 
+import { Icon } from "@iconify/vue";
+
 const appName = import.meta.env.VITE_APP_NAME;
 
 import Button from "primevue/button";
@@ -42,6 +44,8 @@ createInertiaApp({
                 unstyled: true,
                 pt: Aura,
             })
+
+            .component("Icon", Icon)
 
             .component("Button", Button)
             .component("DatePicker", DatePicker)
