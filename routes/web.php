@@ -15,12 +15,11 @@ Route::middleware('guest')->group(function () {
     Route::get('login', function () {
         return Inertia::render('Login');
     })->name('login');
-
     Route::post('login', [LoginController::class, 'login'])->name('post-login');
-
     Route::get('register/business', function () {
         return Inertia::render('register/BusinessRegister');
     })->name('show-register-business');
+    Route::post('register', [BusinessRegisterController::class, 'register'])->name('post-register');
 
     Route::get('forgot-pass', function () {
         return Inertia::render('Login');

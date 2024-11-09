@@ -10,6 +10,8 @@ class WorkCategory extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = ['name'];
 
     public function services(): HasMany

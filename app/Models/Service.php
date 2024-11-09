@@ -10,6 +10,8 @@ class Service extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = ['name', 'work_category_id'];
 
     public function workCategory(): BelongsTo

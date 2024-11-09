@@ -13,4 +13,19 @@ class Business extends Model
         'services',
         'location'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function workCategory()
+    {
+        return $this->belongsTo(WorkCategory::class);
+    }
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
 }

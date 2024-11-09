@@ -1,5 +1,5 @@
 <script setup>
-import { Head, useForm, usePage } from "@inertiajs/vue3";
+import { Head, useForm, usePage, router } from "@inertiajs/vue3";
 import Authenticated from "@/layouts/Authenticated.vue";
 import { ref, watch, computed } from "vue";
 
@@ -57,6 +57,15 @@ async function checkBusinessDetais(activateCallback) {
         },
         onError: () => {},
     });
+}
+
+function registerBusiness() {
+    const payload = {
+        personal: personal.data(),
+        business: business.data(),
+    };
+    router.post(route("post-register", payload));
+    console.log(payload);
 }
 </script>
 
@@ -370,6 +379,7 @@ async function checkBusinessDetais(activateCallback) {
                                 label="Register"
                                 icon="pi pi-check"
                                 iconPos="right"
+                                @click="registerBusiness"
                             />
                         </div>
                     </div>
