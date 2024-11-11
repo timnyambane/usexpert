@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h1>Active Jobs</h1>
+        <h1>In Progress</h1>
     </div>
 </template>

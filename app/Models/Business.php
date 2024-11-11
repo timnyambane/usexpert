@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Business extends Model
 {
     protected $fillable = [
         'user_id',
         'business_name',
-        'work_category',
-        'services',
-        'location'
+        'work_category_id',
+        'location_id'
     ];
 
     public function user()
@@ -26,6 +26,11 @@ class Business extends Model
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
     }
 
 }

@@ -16,7 +16,7 @@ class LocationSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 200) as $index) {
+        foreach (range(1, 10) as $index) {
             Location::create([
                 'town' => $faker->city,
                 'state' => $faker->state,

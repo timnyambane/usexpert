@@ -51,13 +51,20 @@ class BusinessRegisterController extends Controller
             $business = Business::create([
                 'user_id' => $user->id,
                 'business_name' => $businessData['business_name'],
-                'location' => $businessData['location'],
-                'work_category' => $businessData['work_category'],
+                'location_id' => $businessData['location']['id'],
+                'work_category_id' => $businessData['work_category']['id'],
             ]);
+
+            // Attach selected services to the business
+            $serviceIds = collect($businessData['services'])->pluck('id');
+            $business->services()->sync($serviceIds);
+
+            session()->flash('success', 'Business registered successfully with selected services.');
 
         } catch (\Exception $e) {
             Log::error('Error creating business', [$e->getMessage()]);
+            session()->flash('error', 'An error occurred while registering the business.');
         }
-
     }
+
 }

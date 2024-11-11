@@ -46,6 +46,10 @@ class HandleInertiaRequests extends Middleware
             'locations' => Location::orderBy('town')->get(),
             'work_categories' => WorkCategory::orderBy('name')->get(),
             'services' => Service::orderBy('name')->get(),
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+            ]
         ]);
     }
 }

@@ -18,4 +18,9 @@ class Service extends Model
     {
         return $this->belongsTo(WorkCategory::class);
     }
+
+    public function businesses()
+    {
+        return $this->belongsToMany(Business::class);
+    }
 }

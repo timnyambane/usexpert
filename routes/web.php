@@ -3,7 +3,7 @@
 use App\Http\Controllers\BusinessRegisterController;
 use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,7 +15,8 @@ Route::middleware('guest')->group(function () {
     Route::get('login', function () {
         return Inertia::render('Login');
     })->name('login');
-    Route::post('login', [LoginController::class, 'login'])->name('post-login');
+    Route::post('login', [AuthController::class, 'login'])->name('post-login');
+    Route::post('logout', [AuthController::class, 'logout'])->name('post-logout');
     Route::get('register/business', function () {
         return Inertia::render('register/BusinessRegister');
     })->name('show-register-business');
