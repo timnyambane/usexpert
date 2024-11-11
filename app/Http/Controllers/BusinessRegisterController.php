@@ -45,7 +45,7 @@ class BusinessRegisterController extends Controller
                 'email' => $personalData['email'],
                 'password' => $personalData['password'],
                 'phone' => $personalData['phone'],
-                'role' => config('constants.accountType.business')
+                'user_type' => config('constants.accountType.business')
             ]);
 
             $business = Business::create([
@@ -59,7 +59,9 @@ class BusinessRegisterController extends Controller
             $serviceIds = collect($businessData['services'])->pluck('id');
             $business->services()->sync($serviceIds);
 
-            session()->flash('success', 'Business registered successfully with selected services.');
+            session()->flash('success', 'Business account registered successfully');
+
+            return redirect()->route('login');
 
         } catch (\Exception $e) {
             Log::error('Error creating business', [$e->getMessage()]);

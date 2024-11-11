@@ -34,11 +34,12 @@ class CustomerRegisterController extends Controller
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'phone' => $data['phone'],
-                'role' => config('constants.accountType.customer')
+                'user_type' => config('constants.accountType.customer')
             ]);
 
-            return redirect()->route('login')
-                ->with('success', 'Your account has been created successfully');
+            session()->flash('success', 'Account registered successfully.');
+
+            return redirect()->route('login');
 
         } catch (Exception $e) {
             Log::error('Registration failed: ' . $e->getMessage());

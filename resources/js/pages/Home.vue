@@ -1,11 +1,11 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
-import Authenticated from "../layouts/Authenticated.vue";
+import MainLayout from "../layouts/MainLayout.vue";
 import HeroSection from "@components/views/HeroSection.vue";
 import Mission from "../components/views/Mission.vue";
 
 defineOptions({
-    layout: Authenticated,
+    layout: MainLayout,
 });
 </script>
 

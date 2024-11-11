@@ -54,6 +54,7 @@ const { url } = usePage();
                 :as="Link"
                 :href="route('login')"
                 label="Login"
+                icon="pi pi-sign-in"
             />
             <Button
                 v-if="props.user"

@@ -1,63 +1,31 @@
 <script setup>
 import { Head, router } from "@inertiajs/vue3";
-import Authenticated from "@/layouts/Authenticated.vue";
-import { ref, computed, markRaw } from "vue";
-import NewJobs from "./customer/NewJobs.vue";
-import Quoted from "./customer/Quoted.vue";
-import InProgress from "./customer/InProgress.vue";
-import Settings from "./customer/Settings.vue";
-import Completed from "./customer/Completed.vue";
-import Inbox from "./customer/Inbox.vue";
+import MainLayout from "@/layouts/MainLayout.vue";
+import { ref, computed } from "vue";
+import { customerTabs, businessTabs, adminTabs } from "@/Data.js";
 
 const props = defineProps({
     user: Object,
 });
 
 defineOptions({
-    layout: Authenticated,
+    layout: MainLayout,
 });
 
-// Tabs data
-const tabs = ref([
-    {
-        title: "New Jobs",
-        icon: "mdi:briefcase-outline",
-        content: markRaw(NewJobs),
-        value: "0",
-    },
-    {
-        title: "Quoted",
-        icon: "mdi:file-document-outline",
-        content: markRaw(Quoted),
-        value: "1",
-    },
-    {
-        title: "In Progress",
-        icon: "mdi:progress-check",
-        content: markRaw(InProgress),
-        value: "2",
-    },
-    {
-        title: "Completed",
-        icon: "mdi:check-circle-outline",
-        content: markRaw(Completed),
-        value: "3",
-    },
-    {
-        title: "Inbox",
-        icon: "mdi:email-outline",
-        content: markRaw(Inbox),
-        value: "4",
-    },
-    {
-        title: "Settings",
-        icon: "mdi:cog-outline",
-        content: markRaw(Settings),
-        value: "5",
-    },
-]);
+// Determine which tabs to use based on user role
+let tabsData;
+if (props.user.user_type === "customer") {
+    tabsData = customerTabs;
+} else if (props.user.user_type === "business") {
+    tabsData = businessTabs;
+} else if (props.user.user_type === "admin") {
+    tabsData = adminTabs;
+} else {
+    tabsData = []; // Fallback if the role is unrecognized
+}
 
-const activeTab = ref(tabs.value[0].value);
+const tabs = ref(tabsData);
+const activeTab = ref(tabs.value[0]?.value || 0);
 
 const activeTabContent = computed(() => {
     return tabs.value.find((tab) => tab.value === activeTab.value)?.content;
@@ -80,7 +48,7 @@ function logout() {
             class="flex flex-col p-4 bg-gray-50 shadow-md w-full md:w-2/3 lg:w-1/3 my-6 mx-auto rounded-lg"
         >
             <h1 class="font-black text-xl sm:text-2xl">
-                Good Evening, {{ props.user.last_name }}!
+                Good Evening, {{ props.user.first_name }}!
             </h1>
             <Button
                 label="Log Out"
@@ -90,10 +58,12 @@ function logout() {
                 size="small"
                 class="mt-4 w-full sm:w-fit"
             />
+
             <Button
+                v-if="props.user.user_type === 'customer'"
                 label="Post a Job"
                 icon="pi pi-plus-circle"
-                class="mt-6 w-full sm:w-fit"
+                class="mt-6 w-fit"
             />
         </div>
 
@@ -104,7 +74,7 @@ function logout() {
                 <template v-for="tab in tabs" :key="tab.value">
                     <button
                         :class="[
-                            'flex m-1 items-center  rounded-lg justify-center gap-x-2 flex-1 px-4 py-2 font-semibold transition-all duration-300',
+                            'flex m-1 items-center rounded-lg justify-center gap-x-2 flex-1 px-4 py-2 font-semibold transition-all duration-300',
                             activeTab === tab.value
                                 ? 'bg-white text-primary'
                                 : 'hover:text-primary',

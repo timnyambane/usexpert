@@ -1,14 +1,13 @@
 <script setup>
 import { Head, useForm } from "@inertiajs/vue3";
-import Authenticated from "@/layouts/Authenticated.vue";
-import { ref } from "vue";
+import MainLayout from "@/layouts/MainLayout.vue";
 
 const props = defineProps({
     errors: Object,
 });
 
 defineOptions({
-    layout: Authenticated,
+    layout: MainLayout,
 });
 
 const customer = useForm({

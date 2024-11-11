@@ -16,8 +16,13 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        //     'first_name' => 'Admin',
+        //     'last_name' => 'Admin',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => 'Qwerty1!',
+        //     'role' => config('constants.accountType.admin'),
+        //     'phone' => '+254 706-783-789'
+
         // ]);
 
         $this->call(LocationSeeder::class);

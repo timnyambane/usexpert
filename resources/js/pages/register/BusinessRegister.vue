@@ -1,10 +1,10 @@
 <script setup>
 import { Head, useForm, usePage, router } from "@inertiajs/vue3";
-import Authenticated from "@/layouts/Authenticated.vue";
+import MainLayout from "@/layouts/MainLayout.vue";
 import { ref, watch, computed } from "vue";
 
 defineOptions({
-    layout: Authenticated,
+    layout: MainLayout,
 });
 
 const { locations, work_categories, services } = usePage().props;
@@ -378,6 +378,7 @@ function registerBusiness() {
                             <Button
                                 label="Register"
                                 icon="pi pi-check"
+                                :loading="business.processing"
                                 iconPos="right"
                                 @click="registerBusiness"
                             />
