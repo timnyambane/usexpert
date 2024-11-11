@@ -23,7 +23,7 @@ const login = async () => {
 <template>
     <Head title="Login" />
 
-    <div class="flex items-center justify-center mt-20 px-[5%] py-10 border">
+    <div class="flex items-center justify-center mt-20 px-[5%] py-10">
         <form @submit.prevent="login" class="flex flex-col w-[25%]">
             <h1 class="font-black text-4xl my-4 text-center">Login</h1>
             <div class="mb-4">

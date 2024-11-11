@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 
 class AuthController extends Controller
 {
@@ -25,7 +26,7 @@ class AuthController extends Controller
 
         // Set flash message and redirect
         session()->flash('success', 'You have successfully logged in!');
-        return redirect()->route('show-dashboard');
+        return Inertia::location(route('show-dashboard'));
     }
 
 
@@ -39,6 +40,6 @@ class AuthController extends Controller
 
         // Set flash message and redirect
         session()->flash('success', 'You have successfully logged out!');
-        return redirect()->route('show-dashboard');
+        return Inertia::location(route('home'));
     }
 }

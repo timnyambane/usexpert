@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, router } from "@inertiajs/vue3";
+import { Head, router } from "@inertiajs/vue3";
 import Authenticated from "@/layouts/Authenticated.vue";
 import { ref, computed, markRaw } from "vue";
 import NewJobs from "./customer/NewJobs.vue";

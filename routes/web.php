@@ -16,7 +16,6 @@ Route::middleware('guest')->group(function () {
         return Inertia::render('Login');
     })->name('login');
     Route::post('login', [AuthController::class, 'login'])->name('post-login');
-    Route::post('logout', [AuthController::class, 'logout'])->name('post-logout');
     Route::get('register/business', function () {
         return Inertia::render('register/BusinessRegister');
     })->name('show-register-business');
@@ -36,4 +35,5 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'show'])->name('show-dashboard');
+    Route::post('logout', [AuthController::class, 'logout'])->name('post-logout');
 });
