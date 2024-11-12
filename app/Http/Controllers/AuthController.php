@@ -27,6 +27,7 @@ class AuthController extends Controller
         // Set flash message and redirect
         session()->flash('success', 'You have successfully logged in!');
         return Inertia::location(route('show-dashboard'));
+        // return redirect()->route('show-dashboard');
     }
 
 

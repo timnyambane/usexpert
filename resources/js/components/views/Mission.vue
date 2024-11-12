@@ -22,7 +22,11 @@ const missions = [
     <div class="flex flex-col items-center">
         <h1 class="text-5xl font-black my-10">Our Mission</h1>
         <div class="flex py-4 items-center w-full px-[15%]">
-            <div v-for="mission in missions" :key="index" class="flex-1">
+            <div
+                v-for="(index, mission) in missions"
+                :key="index"
+                class="flex-1"
+            >
                 <div class="flex flex-col items-center m-2 p-4 rounded shadow">
                     <img :src="mission.image" alt="Mission Image" />
                     <h1 class="font-bold text-2xl mt-2">{{ mission.title }}</h1>

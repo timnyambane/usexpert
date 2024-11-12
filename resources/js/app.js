@@ -3,12 +3,11 @@ import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import Aura from "@/assets/aura";
 import PrimeVue from "primevue/config";
+import ToastService from "primevue/toastservice";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import "primeicons/primeicons.css";
 
 import { Icon } from "@iconify/vue";
-
-const appName = import.meta.env.VITE_APP_NAME;
 
 import Button from "primevue/button";
 import DatePicker from "primevue/datepicker";
@@ -29,11 +28,12 @@ import Select from "primevue/select";
 import InputNumber from "primevue/inputnumber";
 import InputMask from "primevue/inputmask";
 import MultiSelect from "primevue/multiselect";
-import Tabs from "primevue/tabs";
-import TabList from "primevue/tablist";
-import Tab from "primevue/tab";
-import TabPanels from "primevue/tabpanels";
-import TabPanel from "primevue/tabpanel";
+import Dialog from "primevue/dialog";
+import Toast from "primevue/toast";
+import RadioButton from "primevue/radiobutton";
+import Textarea from "primevue/textarea";
+
+const appName = import.meta.env.VITE_APP_NAME;
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -49,9 +49,8 @@ createInertiaApp({
                 unstyled: true,
                 pt: Aura,
             })
-
+            .use(ToastService)
             .component("Icon", Icon)
-
             .component("Button", Button)
             .component("DatePicker", DatePicker)
             .component("Divider", Divider)
@@ -71,11 +70,10 @@ createInertiaApp({
             .component("InputNumber", InputNumber)
             .component("InputMask", InputMask)
             .component("MultiSelect", MultiSelect)
-            .component("Tabs", Tabs)
-            .component("TabList", TabList)
-            .component("Tab", Tab)
-            .component("TabPanels", TabPanels)
-            .component("TabPanel", TabPanel)
+            .component("Dialog", Dialog)
+            .component("RadioButton", RadioButton)
+            .component("Textarea", Textarea)
+            .component("Toast", Toast)
 
             .mount(el);
     },

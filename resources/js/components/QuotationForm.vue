@@ -1,9 +1,8 @@
 <script setup>
-import { usePage } from "@inertiajs/vue3";
 import { ref } from "vue";
+import { usePage } from "@inertiajs/vue3";
 
-const locations = usePage().props.locations;
-const work_categories = usePage().props.work_categories;
+const { locations, work_categories } = usePage().props;
 const location = ref(null);
 const work_category = ref(null);
 </script>
@@ -18,7 +17,6 @@ const work_category = ref(null);
             class="py-1.5 flex-1"
             size="large"
             showClear
-            editable
         />
         <Select
             v-model="location"

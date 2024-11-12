@@ -1,8 +1,9 @@
 <script setup>
-import { Head, router } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import MainLayout from "@/layouts/MainLayout.vue";
 import { ref, computed } from "vue";
 import { customerTabs, businessTabs, adminTabs } from "@/Data.js";
+import DashGreeting from "../../components/DashGreeting.vue";
 
 const props = defineProps({
     user: Object,
@@ -34,38 +35,13 @@ const activeTabContent = computed(() => {
 const setActiveTab = (value) => {
     activeTab.value = value;
 };
-
-function logout() {
-    router.post(route("post-logout"));
-}
 </script>
 
 <template>
     <Head title="Dashboard" />
     <div class="w-full p-4">
         <!-- User Greeting Section -->
-        <div
-            class="flex flex-col p-4 bg-gray-50 shadow-md w-full md:w-2/3 lg:w-1/3 my-6 mx-auto rounded-lg"
-        >
-            <h1 class="font-black text-xl sm:text-2xl">
-                Good Evening, {{ props.user.first_name }}!
-            </h1>
-            <Button
-                label="Log Out"
-                icon="pi pi-sign-out"
-                link
-                @click="logout"
-                size="small"
-                class="mt-4 w-full sm:w-fit"
-            />
-
-            <Button
-                v-if="props.user.user_type === 'customer'"
-                label="Post a Job"
-                icon="pi pi-plus-circle"
-                class="mt-6 w-fit"
-            />
-        </div>
+        <DashGreeting :user="user" />
 
         <!-- Tabs Section -->
         <div class="w-3/5 mx-auto rounded-lg shadow-lg">

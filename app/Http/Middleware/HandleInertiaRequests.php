@@ -43,13 +43,19 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user()
             ],
+            'flash' => function () {
+                return [
+                    'success' => session('success'),
+                    'error' => session('error'),
+                ];
+            },
             'locations' => Location::orderBy('town')->get(),
             'work_categories' => WorkCategory::orderBy('name')->get(),
             'services' => Service::orderBy('name')->get(),
-            'flash' => [
-                'success' => $request->session()->get('success'),
-                'error' => $request->session()->get('error'),
-            ]
+            // 'flash' => [
+            //     'success' => $request->session()->get('success'),
+            //     'error' => $request->session()->get('error'),
+            // ]
         ]);
     }
 }
