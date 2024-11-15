@@ -41,7 +41,7 @@ const { url } = usePage();
             </Link>
         </div>
 
-        <div class="flex items-center gap-x-6 flex-1 justify-end">
+        <div class="lg:flex items-center gap-x-6 flex-1 justify-end hidden">
             <Button
                 as="a"
                 href="tel:254706783789"
@@ -62,6 +62,11 @@ const { url } = usePage();
                 :href="route('show-dashboard')"
                 label="Dashboard"
             />
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="flex lg:hidden">
+            <Icon icon="heroicons:bars-3-16-solid" class="text-2xl" />
         </div>
     </nav>
 </template>

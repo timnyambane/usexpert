@@ -44,13 +44,13 @@ const setActiveTab = (value) => {
         <DashGreeting :user="user" />
 
         <!-- Tabs Section -->
-        <div class="w-3/5 mx-auto rounded-lg shadow-lg">
+        <div class="w-full lg:w-3/5 mx-auto rounded-lg shadow-lg">
             <!-- Tabs Navigation -->
             <div class="flex bg-gray-100 rounded-t-lg">
                 <template v-for="tab in tabs" :key="tab.value">
                     <button
                         :class="[
-                            'flex m-1 items-center rounded-lg justify-center gap-x-2 flex-1 px-4 py-2 font-semibold transition-all duration-300',
+                            'flex mx-1 mt-1 items-center rounded-t-lg justify-center gap-x-2 flex-1 px-4 py-2 font-semibold transition-all duration-300',
                             activeTab === tab.value
                                 ? 'bg-white text-primary'
                                 : 'hover:text-primary',

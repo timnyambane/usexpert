@@ -4,8 +4,12 @@ import QuotationForm from "../QuotationForm.vue";
 </script>
 
 <template>
-    <div class="flex flex-col px-[10%] items-center justify-between hero py-6">
-        <h4 class="font-black text-6xl text-center mx-[10%] my-10">
+    <div
+        class="flex flex-col px-[10%] items-center justify-between py-2 lg:py-6"
+    >
+        <h4
+            class="font-black text-3xl lg:text-6xl text-center mx-[10%] my-5 lg:my-10"
+        >
             Connecting Local Cleaning Professionals With Local Clients
         </h4>
         <QuotationForm />

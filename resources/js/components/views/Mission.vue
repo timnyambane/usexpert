@@ -20,7 +20,9 @@ const missions = [
 
 <template>
     <div class="flex flex-col items-center">
-        <h1 class="text-5xl font-black my-10">Our Mission</h1>
+        <h1 class="text-3xl lg:text-6xl font-black my-5 lg:my-10">
+            Our Mission
+        </h1>
         <div class="flex py-4 items-center w-full px-[15%]">
             <div
                 v-for="(index, mission) in missions"
