@@ -13,7 +13,7 @@ const propertyType = ref("Residential");
 
 <template>
     <div
-        class="relative flex flex-col mx-auto w-[95%] lg:w-[80%] m-4 p-4 bg-gray-50 shadow"
+        class="relative flex flex-col mx-auto w-[95%] lg:w-[80%] m-8 round p-4 bg-gray-50 shadow"
     >
         <!-- Premium Ribbon with Folding Effect -->
         <div class="absolute top-0 left-0 -mt-3 -ml-4">
@@ -38,12 +38,10 @@ const propertyType = ref("Residential");
                         >Posted 2 weeks ago</span
                     >
                 </div>
-                <div class="">
-                    <span><strong>ID:</strong> 4344344848347</span>
-                </div>
             </div>
             <div class="mt-8 flex">
                 <div class="flex gap-y-2 flex-col flex-1">
+                    <span><strong>Job ID:</strong> 4344344848347</span>
                     <span><strong>Location:</strong> {{ location }}</span>
                     <span><strong>Service:</strong> {{ service }}</span>
                 </div>

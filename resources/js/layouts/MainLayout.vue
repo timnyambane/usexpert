@@ -1,4 +1,6 @@
 <script setup>
+import { onMounted } from "vue";
+
 import Navbar from "@components/Navbar.vue";
 import Footer from "@components/Footer.vue";
 import { usePage } from "@inertiajs/vue3";
@@ -8,28 +10,30 @@ const { props } = usePage();
 const toast = useToast();
 
 // Show flash messages
-if (props.flash?.success) {
-    toast.add({
-        severity: "success",
-        summary: "Success",
-        detail: props.flash.success,
-        life: 3000,
-    });
-}
+onMounted(() => {
+    if (props.flash?.success) {
+        toast.add({
+            severity: "success",
+            summary: "Success",
+            detail: props.flash.success,
+            life: 4000,
+        });
+    }
 
-if (props.flash?.error) {
-    toast.add({
-        severity: "error",
-        summary: "Error",
-        detail: props.flash.error,
-        life: 3000,
-    });
-}
+    if (props.flash?.error) {
+        toast.add({
+            severity: "error",
+            summary: "Error",
+            detail: props.flash.error,
+            life: 4000,
+        });
+    }
+});
 </script>
 
 <template>
     <div class="flex flex-col min-h-screen">
-        <Toast />
+        <Toast position="top-center" />
         <Navbar :user="props.auth.user" />
         <div class="flex-grow">
             <slot />

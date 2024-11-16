@@ -26,14 +26,14 @@ if (props.user.user_type === "customer") {
 }
 
 const tabs = ref(tabsData);
-const activeTab = ref(tabs.value[0]?.value || 0);
+const activeTab = ref(0); // Set to 0 by default to use the index
 
 const activeTabContent = computed(() => {
-    return tabs.value.find((tab) => tab.value === activeTab.value)?.content;
+    return tabs.value[activeTab.value]?.content;
 });
 
-const setActiveTab = (value) => {
-    activeTab.value = value;
+const setActiveTab = (index) => {
+    activeTab.value = index;
 };
 </script>
 
@@ -47,15 +47,15 @@ const setActiveTab = (value) => {
         <div class="w-full lg:w-3/5 mx-auto rounded-lg shadow-lg">
             <!-- Tabs Navigation -->
             <div class="flex bg-gray-100 rounded-t-lg">
-                <template v-for="tab in tabs" :key="tab.value">
+                <template v-for="(tab, index) in tabs" :key="index">
                     <button
                         :class="[
-                            'flex mx-1 mt-1 items-center rounded-t-lg justify-center gap-x-2 flex-1 px-4 py-2 font-semibold transition-all duration-300',
-                            activeTab === tab.value
+                            'flex mx-1 mt-1 items-center rounded-t-lg justify-center gap-x-2 flex-1 px-4 py-4 font-semibold transition-all duration-300',
+                            activeTab === index
                                 ? 'bg-white text-primary'
                                 : 'hover:text-primary',
                         ]"
-                        @click="setActiveTab(tab.value)"
+                        @click="setActiveTab(index)"
                     >
                         <Icon :icon="tab.icon" height="20" />
                         <span class="hidden sm:inline">{{ tab.title }}</span>
@@ -64,15 +64,9 @@ const setActiveTab = (value) => {
             </div>
 
             <!-- Tab Content -->
-            <div class="p-2 rounded-b-lg">
+            <div class="rounded-b-lg">
                 <component :is="activeTabContent" />
             </div>
         </div>
     </div>
 </template>
-
-<style scoped>
-button {
-    transition: color 0.3s ease, border-color 0.3s ease, background-color;
-}
-</style>
