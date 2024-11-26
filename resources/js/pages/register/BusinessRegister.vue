@@ -116,7 +116,7 @@ function registerBusiness() {
                         >
                         <div class="m-1 flex flex-col gap-y-4">
                             <div>
-                                <label for="" class="font-semibold ml-1"
+                                <label for="name" class="font-semibold ml-1"
                                     >Full Names</label
                                 >
                                 <IconField>
@@ -127,7 +127,8 @@ function registerBusiness() {
                                         size="large"
                                         v-model="personal.full_name"
                                         type="text"
-                                        name="first_last_name"
+                                        name="name"
+                                        id="name"
                                     />
                                 </IconField>
                                 <p

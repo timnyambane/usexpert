@@ -45,11 +45,9 @@ const isStepValid = computed(() => {
     } else if (step.value === 2) {
         return jobPosting.propertyType !== null;
     } else if (step.value === 3) {
-        // Ensure urgency is selected
         if (!jobPosting.urgency) {
             return false;
         }
-        // If urgency is "specific", check jobDate's value
         if (jobPosting.urgency === "specific") {
             return jobDate.value !== null;
         }
@@ -82,7 +80,7 @@ function postJob() {
     if (jobPosting.urgency === "specific") {
         jobPosting.urgency = jobDate.value;
     }
-    console.log(jobPosting);
+    console.log(jobPosting.data());
 }
 </script>
 

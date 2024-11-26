@@ -43,7 +43,7 @@ async function registerCustomer() {
             <div class="flex flex-col gap-2 mx-10 mt-4">
                 <div class="m-1 flex flex-col gap-y-4">
                     <div>
-                        <label for="" class="font-semibold ml-1"
+                        <label for="name" class="font-semibold ml-1"
                             >Full Names</label
                         >
                         <IconField>
@@ -54,7 +54,9 @@ async function registerCustomer() {
                                 size="large"
                                 v-model="customer.full_name"
                                 type="text"
-                                name="first_last_name"
+                                name="name"
+                                id="name"
+                                autocomplete="name"
                             />
                         </IconField>
                         <p
@@ -91,7 +93,7 @@ async function registerCustomer() {
                         <label for="" class="font-semibold ml-1"
                             >Phone Number</label
                         >
-                        <IconField>
+                        <IconField class="phone">
                             <InputIcon class="pi pi-phone" />
                             <InputText
                                 v-model="customer.phone"
