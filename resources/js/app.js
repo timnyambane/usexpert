@@ -34,6 +34,7 @@ import RadioButton from "primevue/radiobutton";
 import Textarea from "primevue/textarea";
 import ToggleSwitch from "primevue/toggleswitch";
 import Avatar from "primevue/avatar";
+import Rating from "primevue/rating";
 
 const appName = import.meta.env.VITE_APP_NAME;
 
@@ -77,6 +78,7 @@ createInertiaApp({
             .component("Textarea", Textarea)
             .component("ToggleSwitch", ToggleSwitch)
             .component("Avatar", Avatar)
+            .component("Rating", Rating)
             .component("Toast", Toast)
 
             .mount(el);

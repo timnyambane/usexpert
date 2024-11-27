@@ -103,9 +103,11 @@ function registerBusiness() {
                     Business
                 </div>
                 <Divider />
-                <div class="payment flex items-center justify-center gap-2">
+                <div
+                    class="subscription flex items-center justify-center gap-2"
+                >
                     <Icon icon="heroicons-currency-dollar" height="24" />
-                    Payment
+                    Subscription
                 </div>
             </div>
             <StepPanels>
@@ -258,7 +260,8 @@ function registerBusiness() {
                                             size="large"
                                             v-model="business.business_name"
                                             type="text"
-                                            name="username"
+                                            name="company"
+                                            id="company_name"
                                         />
                                     </IconField>
                                     <p
