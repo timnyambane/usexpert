@@ -18,7 +18,6 @@ const work_category = ref(null);
             placeholder="Choose the work category"
             class="py-1.5 flex-1 w-full"
             size="large"
-            showClear
         />
         <Select
             v-model="location"
@@ -27,8 +26,11 @@ const work_category = ref(null);
             placeholder="Select your location"
             class="py-1.5 flex-1 w-full"
             size="large"
-            showClear
         />
-        <Button label="Get a free quote" size="large" class="flex-1 w-full" />
+        <Button
+            label="Get a free quote"
+            size="large"
+            class="flex-1 w-full mt-2 md:mt-0"
+        />
     </div>
 </template>

@@ -23,9 +23,13 @@ const login = async () => {
 <template>
     <Head title="Login" />
 
-    <div class="flex items-center justify-center mt-20 px-[5%]">
-        <form @submit.prevent="login" class="flex flex-col w-[25%]">
+    <div class="flex items-center justify-center mt-10 px-4 sm:px-8 md:px-12">
+        <form
+            @submit.prevent="login"
+            class="flex flex-col w-full max-w-4xl sm:max-w-xl md:max-w-lg mx-auto"
+        >
             <h1 class="font-black text-4xl my-4 text-center">Login</h1>
+
             <div class="mb-4">
                 <label class="ml-2 font-semibold" for="email">E-mail</label>
                 <IconField>
@@ -42,6 +46,7 @@ const login = async () => {
                     {{ user.errors.email }}
                 </p>
             </div>
+
             <div class="mb-4">
                 <label class="ml-2 font-semibold" for="password"
                     >Password</label
@@ -65,19 +70,20 @@ const login = async () => {
                 <Checkbox inputId="rememberMe" />
                 <label for="rememberMe" class="ml-2">Remember Me</label>
             </div>
+
             <Button
                 label="Login"
-                class="my-2 mx-12"
+                class="my-2 mx-auto"
                 type="submit"
                 :loading="user.processing"
-                iconPos="right"
             />
 
             <Link
                 :href="route('forgot-pass')"
-                class="text-center text-primary mt-4"
-                >Forgot password?</Link
+                class="text-center text-primary mt-4 block"
             >
+                Forgot password?
+            </Link>
         </form>
     </div>
 </template>

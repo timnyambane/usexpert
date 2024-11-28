@@ -98,7 +98,9 @@ function postJob() {
                 link
                 @click="logout"
                 size="small"
-                class="mt-4 w-full sm:w-fit"
+                class="mt-4 w-fit"
+                outlined
+                severity="danger"
             />
 
             <Button

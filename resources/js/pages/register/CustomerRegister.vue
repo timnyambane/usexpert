@@ -30,7 +30,7 @@ async function registerCustomer() {
 <template>
     <Head title="Register as Customer" />
     <div
-        class="flex flex-col items-center justify-center mt-10 px-[5%] w-[40%] mx-auto"
+        class="flex flex-col items-center justify-center mt-10 px-4 sm:px-8 md:px-12 w-full max-w-4xl mx-auto"
     >
         <h1 class="font-black text-4xl my-4 text-center">
             Register as Customer
@@ -40,7 +40,7 @@ async function registerCustomer() {
             class="w-full flex flex-col"
             action=""
         >
-            <div class="flex flex-col gap-2 mx-10 mt-4">
+            <div class="flex flex-col gap-4 mx-4 lg:mx-10 mt-4">
                 <div class="m-1 flex flex-col gap-y-4">
                     <div>
                         <label for="name" class="font-semibold ml-1"
@@ -68,7 +68,9 @@ async function registerCustomer() {
                     </div>
 
                     <div>
-                        <label for="" class="font-semibold ml-1">E-mail</label>
+                        <label for="email" class="font-semibold ml-1"
+                            >E-mail</label
+                        >
                         <IconField>
                             <InputIcon class="pi pi-envelope" />
                             <InputText
@@ -90,7 +92,7 @@ async function registerCustomer() {
 
                 <div class="m-1 flex flex-col gap-y-4">
                     <div class="phone">
-                        <label for="" class="font-semibold ml-1"
+                        <label for="phone" class="font-semibold ml-1"
                             >Phone Number</label
                         >
                         <IconField class="phone">
@@ -112,7 +114,7 @@ async function registerCustomer() {
                     </div>
 
                     <div>
-                        <label for="" class="font-semibold ml-1"
+                        <label for="password" class="font-semibold ml-1"
                             >Password</label
                         >
                         <IconField>
@@ -134,7 +136,7 @@ async function registerCustomer() {
                     </div>
 
                     <div>
-                        <label for="" class="font-semibold ml-1"
+                        <label for="confirmPassword" class="font-semibold ml-1"
                             >Confirm Password</label
                         >
                         <IconField>
@@ -163,7 +165,6 @@ async function registerCustomer() {
                     label="Create Account"
                     class="px-6 py-2"
                     :loading="customer.processing"
-                    iconPos="right"
                 />
             </div>
         </form>

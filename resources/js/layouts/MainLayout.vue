@@ -38,7 +38,7 @@ onMounted(() => {
         <div class="flex-grow">
             <slot />
         </div>
-        <Footer />
+        <Footer :user="props.auth.user" />
     </div>
 </template>
 

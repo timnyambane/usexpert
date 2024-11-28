@@ -1,11 +1,21 @@
 <script setup>
-import { Link, usePage } from "@inertiajs/vue3";
+import { Link, router, usePage } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 const props = defineProps({
     user: Object,
 });
 
 const { url } = usePage();
+const isMobileMenuOpen = ref(false);
+
+const toggleMobileMenu = () => {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
+
+function logout() {
+    router.post(route("post-logout"));
+}
 </script>
 
 <template>
@@ -20,7 +30,9 @@ const { url } = usePage();
             </Link>
         </div>
 
-        <div class="flex items-center justify-center flex-1 gap-6 mx-4">
+        <div
+            class="hidden lg:flex items-center justify-center flex-1 gap-6 mx-4"
+        >
             <Link
                 v-if="!props.user"
                 :href="route('show-register-customer')"
@@ -45,7 +57,7 @@ const { url } = usePage();
             <Button
                 as="a"
                 href="tel:254706783789"
-                label="Contact Us"
+                label="Call Us"
                 outlined
                 icon="pi pi-phone"
             />
@@ -64,9 +76,94 @@ const { url } = usePage();
             />
         </div>
 
-        <!-- Mobile Menu -->
+        <!-- Mobile Menu Trigger -->
         <div class="flex lg:hidden">
-            <Icon icon="heroicons:bars-3-16-solid" class="text-2xl" />
+            <Icon
+                icon="heroicons:bars-3-16-solid"
+                class="text-2xl cursor-pointer"
+                @click="toggleMobileMenu"
+            />
         </div>
     </nav>
+
+    <!-- Sliding Mobile Menu -->
+    <div
+        class="fixed inset-0 z-50 bg-black bg-opacity-50 transition-opacity lg:hidden"
+        v-show="isMobileMenuOpen"
+        @click="toggleMobileMenu"
+    ></div>
+
+    <div
+        class="fixed top-0 left-0 w-[65%] h-full bg-white shadow-lg z-50 transform transition-transform duration-500"
+        :class="{
+            '-translate-x-full': !isMobileMenuOpen,
+            'translate-x-0': isMobileMenuOpen,
+        }"
+    >
+        <div class="p-4 flex items-center justify-between">
+            <img
+                src="https://thelocalpro.com.au/_nuxt/img/lp-logo.2219ddf.png"
+                alt="Logo"
+                class="h-8"
+            />
+        </div>
+
+        <div class="p-2 flex flex-col space-y-4">
+            <Link
+                v-if="!props.user"
+                :href="route('show-register-customer')"
+                class="block text-gray-700 my-2 p-1 rounded"
+                @click="toggleMobileMenu"
+            >
+                Create Account
+            </Link>
+            <Link
+                v-if="!props.user"
+                :href="route('show-register-business')"
+                class="block text-gray-700 my-2 p-1 rounded"
+                @click="toggleMobileMenu"
+            >
+                Register Business
+            </Link>
+            <Button
+                as="a"
+                :href="route('login')"
+                class="block text-gray-700 my-2 p-1 rounded w-fit px-8"
+                v-if="!props.user"
+                @click="toggleMobileMenu"
+                label="Login"
+                icon="pi pi-sign-in"
+            />
+            <Button
+                :href="route('show-dashboard')"
+                @click="toggleMobileMenu"
+                class="block text-gray-700 p-1 rounded w-fit px-8"
+                v-if="props.user"
+                label="Dashboard"
+            />
+            <Button
+                label="Logout"
+                v-if="props.user"
+                @click="logout"
+                class="w-fit px-8"
+                icon="pi pi-sign-out"
+                severity="danger"
+                link
+                outlined
+            />
+
+            <Button
+                as="a"
+                href="tel:254706783789"
+                class="px-8 w-fit"
+                label="Call Us"
+                outlined
+                icon="pi pi-phone"
+            />
+        </div>
+    </div>
 </template>
+
+<style scoped>
+/* Transition styles for smooth sliding */
+</style>

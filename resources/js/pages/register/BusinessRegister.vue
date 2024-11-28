@@ -71,11 +71,16 @@ function registerBusiness() {
 
 <template>
     <Head title="Register Business" />
-    <div class="flex flex-col items-center justify-center mt-10 px-[5%]">
+    <div
+        class="flex flex-col items-center justify-center mt-10 px-4 sm:px-8 md:px-12"
+    >
         <h1 class="font-black text-4xl my-4 text-center">Register Business</h1>
 
-        <Stepper v-model:value="activeStep" class="mt-4 w-[50%]">
-            <div class="flex items-center justify-between gap-4 px-[10%]">
+        <Stepper
+            v-model:value="activeStep"
+            class="mt-4 w-full max-w-3xl sm:max-w-xl md:max-w-lg"
+        >
+            <div class="flex items-center justify-between lg:gap-4 px-0">
                 <div class="personal flex items-center justify-center gap-2">
                     <Icon
                         :icon="
@@ -94,7 +99,6 @@ function registerBusiness() {
                         "
                         height="24"
                     />
-
                     Personal
                 </div>
                 <Divider />
@@ -112,7 +116,9 @@ function registerBusiness() {
             </div>
             <StepPanels>
                 <StepPanel v-slot="{ activateCallback }" :value="1">
-                    <div class="flex flex-col gap-y-2 mx-[15%]">
+                    <div
+                        class="flex flex-col gap-y-2 mx-auto w-full max-w-3xl sm:max-w-xl md:max-w-lg"
+                    >
                         <span class="font-bold text-center"
                             >Enter your Personal Details</span
                         >
@@ -243,7 +249,9 @@ function registerBusiness() {
                 </StepPanel>
                 <StepPanel v-slot="{ activateCallback }" :value="2">
                     <div class="flex flex-col gap-2 mx-auto">
-                        <div class="flex flex-col gap-y-2 mx-[15%]">
+                        <div
+                            class="flex flex-col gap-y-2 mx-auto w-full max-w-3xl sm:max-w-xl md:max-w-lg"
+                        >
                             <span class="font-bold text-center"
                                 >Enter your Business Details</span
                             >
@@ -370,7 +378,9 @@ function registerBusiness() {
                     </div>
                 </StepPanel>
                 <StepPanel v-slot="{ activateCallback }" :value="3">
-                    <div class="flex flex-col gap-2 mx-auto">
+                    <div
+                        class="flex flex-col gap-y-2 mx-auto w-full max-w-3xl sm:max-w-xl md:max-w-lg"
+                    >
                         <span class="font-bold text-center">Payment</span>
                         <div class="flex pt-6 justify-between">
                             <Button

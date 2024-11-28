@@ -39,18 +39,18 @@ const setActiveTab = (index) => {
 
 <template>
     <Head title="Dashboard" />
-    <div class="w-full p-4">
+    <div class="w-full px-4 py-6">
         <!-- User Greeting Section -->
         <DashGreeting :user="user" />
 
         <!-- Tabs Section -->
-        <div class="w-full lg:w-3/5 mx-auto rounded-lg shadow-lg">
+        <div class="w-full max-w-screen-xl mx-auto rounded-lg shadow-lg">
             <!-- Tabs Navigation -->
-            <div class="flex bg-gray-100 rounded-t-lg">
+            <div class="flex flex-wrap bg-gray-100 rounded-t-lg">
                 <template v-for="(tab, index) in tabs" :key="index">
                     <button
                         :class="[
-                            'flex mx-1 mt-1 items-center rounded-t-lg justify-center gap-x-2 flex-1 px-4 py-4 font-semibold transition-all duration-300',
+                            'flex items-center justify-center gap-x-2 px-4 py-4 font-semibold transition-all duration-300 w-full sm:w-auto sm:flex-1',
                             activeTab === index
                                 ? 'bg-white text-primary'
                                 : 'hover:text-primary',
@@ -64,7 +64,7 @@ const setActiveTab = (index) => {
             </div>
 
             <!-- Tab Content -->
-            <div class="rounded-b-lg">
+            <div class="p-4 rounded-b-lg">
                 <component :is="activeTabContent" />
             </div>
         </div>
