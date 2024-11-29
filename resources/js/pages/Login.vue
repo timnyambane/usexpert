@@ -26,7 +26,7 @@ const login = async () => {
     <div class="flex items-center justify-center mt-10 px-4 sm:px-8 md:px-12">
         <form
             @submit.prevent="login"
-            class="flex flex-col w-full max-w-4xl sm:max-w-xl md:max-w-lg mx-auto"
+            class="flex flex-col px-4 w-full max-w-4xl sm:max-w-xl md:max-w-lg mx-auto"
         >
             <h1 class="font-black text-4xl my-4 text-center">Login</h1>
 

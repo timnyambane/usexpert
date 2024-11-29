@@ -30,7 +30,7 @@ async function registerCustomer() {
 <template>
     <Head title="Register as Customer" />
     <div
-        class="flex flex-col items-center justify-center mt-10 px-4 sm:px-8 md:px-12 w-full max-w-4xl mx-auto"
+        class="flex flex-col items-center justify-center mt-10 px-4 sm:px-8 md:px-12 w-full max-w-2xl mx-auto"
     >
         <h1 class="font-black text-4xl my-4 text-center">
             Register as Customer
