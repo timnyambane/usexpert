@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h1>In Progress</h1>
+        <h1>Progress</h1>
     </div>
 </template>

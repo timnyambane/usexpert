@@ -38,7 +38,7 @@ export const customerTabs = [
         content: markRaw(CustomerInbox),
     },
     {
-        title: "In Progress",
+        title: "Progress",
         icon: "mdi:progress-check",
         content: markRaw(CustomerInProgress),
     },
@@ -66,7 +66,7 @@ export const businessTabs = [
         content: markRaw(BusinessQuoted),
     },
     {
-        title: "In Progress",
+        title: "Progress",
         icon: "mdi:cog-outline",
         content: markRaw(BusinessInProgress),
     },

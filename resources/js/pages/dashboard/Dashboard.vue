@@ -1,19 +1,16 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
-import MainLayout from "@/layouts/MainLayout.vue";
 import { ref, computed } from "vue";
 import { customerTabs, businessTabs, adminTabs } from "@/Data.js";
-import DashGreeting from "../../components/DashGreeting.vue";
+import DashGreeting from "@/components/DashGreeting.vue";
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
+import MobileDashboard from "@/components/MobileDashboard.vue";
 
 const props = defineProps({
     user: Object,
 });
 
-defineOptions({
-    layout: MainLayout,
-});
-
-// Determine which tabs to use based on user role
 let tabsData;
 if (props.user.user_type === "customer") {
     tabsData = customerTabs;
@@ -22,11 +19,11 @@ if (props.user.user_type === "customer") {
 } else if (props.user.user_type === "admin") {
     tabsData = adminTabs;
 } else {
-    tabsData = []; // Fallback if the role is unrecognized
+    tabsData = [];
 }
 
 const tabs = ref(tabsData);
-const activeTab = ref(0); // Set to 0 by default to use the index
+const activeTab = ref(0);
 
 const activeTabContent = computed(() => {
     return tabs.value[activeTab.value]?.content;
@@ -39,34 +36,44 @@ const setActiveTab = (index) => {
 
 <template>
     <Head title="Dashboard" />
-    <div class="w-full px-4 py-6">
-        <!-- User Greeting Section -->
-        <DashGreeting :user="user" />
 
-        <!-- Tabs Section -->
-        <div class="w-full max-w-screen-xl mx-auto rounded-lg shadow-lg">
-            <!-- Tabs Navigation -->
-            <div class="flex flex-wrap bg-gray-100 rounded-t-lg p-1">
-                <template v-for="(tab, index) in tabs" :key="index">
-                    <button
-                        :class="[
-                            ' rounded-lg flex items-center justify-center gap-x-2 px-4 py-2.5 font-semibold transition-all duration-300 w-full sm:w-auto sm:flex-1',
-                            activeTab === index
-                                ? 'bg-white text-primary'
-                                : 'hover:text-primary',
-                        ]"
-                        @click="setActiveTab(index)"
-                    >
-                        <Icon :icon="tab.icon" height="20" />
-                        <span class="hidden sm:inline">{{ tab.title }}</span>
-                    </button>
-                </template>
-            </div>
+    <!-- Desktop display -->
+    <div class="hidden md:flex flex-col h-screen">
+        <Navbar :user="user" />
+        <div class="px-4 py-6 flex-1">
+            <DashGreeting :user="user" />
 
-            <!-- Tab Content -->
-            <div class="rounded-b-lg">
-                <component :is="activeTabContent" />
+            <!-- Tabs Section -->
+            <div class="w-full max-w-screen-xl mx-auto rounded-lg shadow-lg">
+                <div class="flex flex-wrap bg-gray-100 rounded-t-lg p-1">
+                    <template v-for="(tab, index) in tabs" :key="index">
+                        <button
+                            :class="[
+                                ' rounded-lg flex items-center justify-center gap-x-2 px-4 py-2.5 font-semibold transition-all duration-300 w-full sm:w-auto sm:flex-1',
+                                activeTab === index
+                                    ? 'bg-white text-primary'
+                                    : 'hover:text-primary',
+                            ]"
+                            @click="setActiveTab(index)"
+                        >
+                            <Icon :icon="tab.icon" height="20" />
+                            <span class="hidden sm:inline">{{
+                                tab.title
+                            }}</span>
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="rounded-b-lg">
+                    <component :is="activeTabContent" />
+                </div>
             </div>
         </div>
+        <Footer />
+    </div>
+    <!-- Mobile view -->
+    <div class="flex md:hidden">
+        <MobileDashboard :user="user" />
     </div>
 </template>

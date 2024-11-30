@@ -16,3 +16,18 @@ defineOptions({
         <Mission />
     </div>
 </template>
+
+<style>
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+</style>

@@ -19,7 +19,7 @@ function logout() {
 </script>
 
 <template>
-    <nav class="flex items-center justify-between py-2 px-[5%] bg-blue-50">
+    <nav class="flex items-center justify-between py-2 px-10 bg-blue-50 shadow">
         <div class="flex-1 justify-start">
             <Link :href="route('home')">
                 <img
@@ -80,7 +80,7 @@ function logout() {
         <div class="flex lg:hidden">
             <Icon
                 icon="heroicons:bars-3-16-solid"
-                class="text-2xl cursor-pointer"
+                class="text-3xl cursor-pointer text-primary-800"
                 @click="toggleMobileMenu"
             />
         </div>
@@ -135,9 +135,10 @@ function logout() {
                 icon="pi pi-sign-in"
             />
             <Button
+                as="a"
                 :href="route('show-dashboard')"
                 @click="toggleMobileMenu"
-                class="block text-gray-700 p-1 rounded w-fit px-8"
+                class="w-fit"
                 v-if="props.user"
                 label="Dashboard"
             />
@@ -145,25 +146,22 @@ function logout() {
                 label="Logout"
                 v-if="props.user"
                 @click="logout"
-                class="w-fit px-8"
+                class="w-fit"
                 icon="pi pi-sign-out"
                 severity="danger"
-                link
                 outlined
             />
 
             <Button
                 as="a"
                 href="tel:254706783789"
-                class="px-8 w-fit"
+                class="w-fit"
                 label="Call Us"
-                outlined
+                link
                 icon="pi pi-phone"
             />
         </div>
     </div>
 </template>
 
-<style scoped>
-/* Transition styles for smooth sliding */
-</style>
+<style scoped></style>

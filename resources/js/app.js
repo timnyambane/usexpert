@@ -3,7 +3,6 @@ import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import Aura from "@/assets/aura";
 import PrimeVue from "primevue/config";
-import ToastService from "primevue/toastservice";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 import "primeicons/primeicons.css";
 
@@ -29,7 +28,6 @@ import InputNumber from "primevue/inputnumber";
 import InputMask from "primevue/inputmask";
 import MultiSelect from "primevue/multiselect";
 import Dialog from "primevue/dialog";
-import Toast from "primevue/toast";
 import RadioButton from "primevue/radiobutton";
 import Textarea from "primevue/textarea";
 import ToggleSwitch from "primevue/toggleswitch";
@@ -52,7 +50,6 @@ createInertiaApp({
                 unstyled: true,
                 pt: Aura,
             })
-            .use(ToastService)
             .component("Icon", Icon)
             .component("Button", Button)
             .component("DatePicker", DatePicker)
@@ -79,7 +76,6 @@ createInertiaApp({
             .component("ToggleSwitch", ToggleSwitch)
             .component("Avatar", Avatar)
             .component("Rating", Rating)
-            .component("Toast", Toast)
 
             .mount(el);
     },

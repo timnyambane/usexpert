@@ -63,13 +63,7 @@ const isSendButtonDisabled = computed(() => {
                         {{ message.sender.charAt(0) }}
                     </div>
                     <div class="flex-1">
-                        <p
-                            class="font-semibold"
-                            :class="{
-                                'text-gray-900': !message.read,
-                                'text-gray-500': message.read,
-                            }"
-                        >
+                        <p class="font-semibold text-gray-900">
                             {{ message.sender }}
                         </p>
                         <p class="text-sm text-gray-500">
@@ -166,17 +160,4 @@ const isSendButtonDisabled = computed(() => {
     </div>
 </template>
 
-<style scoped>
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-</style>
+<style scoped></style>
