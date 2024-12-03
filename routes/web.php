@@ -4,6 +4,7 @@ use App\Http\Controllers\BusinessRegisterController;
 use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JobPostController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -36,4 +37,6 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'show'])->name('show-dashboard');
     Route::post('logout', [AuthController::class, 'logout'])->name('post-logout');
+    Route::get('get-jobs', [JobPostController::class, 'index'])->name('get-jobs');
+    Route::post('job-post', [JobPostController::class, 'store'])->name('job-post');
 });

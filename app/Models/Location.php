@@ -15,4 +15,10 @@ class Location extends Model
         'latitude',
         'post_code'
     ];
+
+    public function jobPosts()
+    {
+        return $this->hasMany(JobPost::class);
+    }
+
 }

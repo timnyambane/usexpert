@@ -23,4 +23,10 @@ class WorkCategory extends Model
     {
         $this->belongsToMany(Business::class);
     }
+
+    public function jobPosts()
+    {
+        return $this->hasMany(JobPost::class);
+    }
+
 }

@@ -77,10 +77,20 @@ function prevStep() {
 }
 
 function postJob() {
-    if (jobPosting.urgency === "specific") {
-        jobPosting.urgency = jobDate.value;
+    if (jobPosting.urgency === "specific" && jobDate.value) {
+        const formattedDate = new Date(jobDate.value)
+            .toISOString()
+            .slice(0, 19)
+            .replace("T", " ");
+        jobPosting.urgency = formattedDate;
     }
-    console.log(jobPosting.data());
+
+    if (!jobPosting.urgency) {
+        console.error("Urgency is missing or null:", jobPosting);
+        return;
+    }
+
+    router.post(route("job-post"), jobPosting);
 }
 </script>
 
@@ -90,7 +100,7 @@ function postJob() {
     >
         <div class="flex flex-col">
             <h1 class="font-black text-xl sm:text-2xl">
-                Good Evening, {{ props.user.first_name }}!
+                Good Evening, {{ props.user.last_name }}!
             </h1>
             <Button
                 label="Log Out"

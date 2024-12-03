@@ -23,4 +23,9 @@ class Service extends Model
     {
         return $this->belongsToMany(Business::class);
     }
+
+    public function jobPosts()
+    {
+        return $this->hasMany(JobPost::class);
+    }
 }
