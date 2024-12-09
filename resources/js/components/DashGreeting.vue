@@ -24,7 +24,6 @@ const jobPosting = useForm({
 });
 
 const step = ref(1);
-
 const minDate = ref(new Date());
 
 const filteredServices = computed(() => {
@@ -62,20 +61,24 @@ const isStepValid = computed(() => {
     return true;
 });
 
+// Logout function
 function logout() {
     router.post(route("post-logout"));
 }
 
+// Navigate to the next step in the form
 function nextStep() {
     if (isStepValid.value) {
         step.value++;
     }
 }
 
+// Navigate to the previous step in the form
 function prevStep() {
     step.value--;
 }
 
+// Post the job data to the server
 function postJob() {
     if (jobPosting.urgency === "specific" && jobDate.value) {
         const formattedDate = new Date(jobDate.value)
@@ -90,7 +93,23 @@ function postJob() {
         return;
     }
 
-    router.post(route("job-post"), jobPosting);
+    jobPosting.processing = true;
+
+    router.post(route("job-post"), jobPosting, {
+        onSuccess: () => {
+            jobPosting.reset();
+            postJobModal.value = false;
+        },
+        onError: (error) => {
+            console.error("Error posting job:", error.response || error);
+            postJobModal.value = false;
+        },
+        onFinish: () => {
+            jobPosting.processing = false;
+            jobPosting.reset();
+            step.value = 0;
+        },
+    });
 }
 </script>
 
@@ -305,6 +324,7 @@ function postJob() {
                             raised
                             rounded
                             @click="postJob"
+                            :loading="jobPosting.processing"
                         />
                     </div>
                 </div>

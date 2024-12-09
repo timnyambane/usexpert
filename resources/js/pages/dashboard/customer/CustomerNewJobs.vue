@@ -1,64 +1,52 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import axios from "axios";
+import { formatDistanceToNow, parseISO } from "date-fns"; // Import date-fns functions
 
-const jobs = ref([
-    {
-        id: 1,
-        title: "Complete Home Automation System",
-        desc: "Upgrade your home with the latest smart technology for lighting, security, and climate control. Designed to make your life more convenient and efficient.",
-        location: "Aarons Pass, NSW, 2850",
-        urgency: "Immediately",
-        service: "Smart Home Automation",
-        propertyType: "Residential",
-        type: "Premium",
-    },
-    {
-        id: 2,
-        title: "Commercial Office Fit-Out",
-        desc: "Transform your commercial space into a functional and visually appealing office environment. Perfect for startups and expanding businesses.",
-        location: "Sydney, NSW, 2000",
-        urgency: "Next Week",
-        service: "Office Renovation",
-        propertyType: "Commercial",
-        type: "Standard",
-    },
-    {
-        id: 3,
-        title: "Roof Restoration and Repairs",
-        desc: "Restore your roof to its former glory with high-quality repairs. Protect your property from leaks and weather damage while enhancing its aesthetic appeal.",
-        location: "Melbourne, VIC, 3000",
-        urgency: "2 Days",
-        service: "Roof Repair",
-        propertyType: "Residential",
-        type: "Premium",
-    },
-    {
-        id: 4,
-        title: "Luxury Kitchen Upgrade",
-        desc: "Revamp your kitchen with modern appliances, bespoke cabinetry, and luxurious finishes. Designed to meet the needs of a professional cook or a large family.",
-        location: "Brisbane, QLD, 4000",
-        urgency: "1 Month",
-        service: "Kitchen Remodeling",
-        propertyType: "Commercial",
-        type: "Standard",
-    },
-    {
-        id: 5,
-        title: "Timber Flooring Installation",
-        desc: "Enhance your home with high-quality timber flooring that adds warmth, style, and durability. Perfect for living rooms, bedrooms, or hallways.",
-        location: "Adelaide, SA, 5000",
-        urgency: "Tomorrow",
-        service: "Flooring Installation",
-        propertyType: "Residential",
-        type: "Premium",
-    },
-]);
+const jobs = ref([]);
+const loading = ref(true);
+
+onMounted(() => {
+    axios
+        .get(route("get-jobs"))
+        .then((res) => {
+            jobs.value = res.data;
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .finally(() => {
+            loading.value = false;
+        });
+});
+
+const formatRelativeTime = (date) => {
+    const parsedDate = parseISO(date);
+    return formatDistanceToNow(parsedDate, { addSuffix: true });
+};
 </script>
 
 <template>
     <div class="flex flex-col gap-8">
-        <!-- Loop through jobs array to create 5 cards -->
+        <div class="flex items-center" v-if="loading">
+            <div
+                class="rounded m-4 border border-surface-200 dark:border-surface-700 p-6 bg-surface-0 dark:bg-surface-900 lg:w-[80%] mx-auto"
+            >
+                <div class="mb-2">
+                    <Skeleton width="10rem" class="mb-2"></Skeleton>
+                    <Skeleton width="5rem" class="mb-2"></Skeleton>
+                    <Skeleton height=".5rem"></Skeleton>
+                </div>
+                <Skeleton width="100%" height="150px"></Skeleton>
+                <div class="flex justify-between mt-4">
+                    <Skeleton width="4rem" height="2rem"></Skeleton>
+                    <Skeleton width="4rem" height="2rem"></Skeleton>
+                </div>
+            </div>
+        </div>
         <div
+            v-else
             v-for="job in jobs"
             :key="job.id"
             class="relative flex flex-col mx-auto w-[95%] lg:w-[80%] m-8 round p-4 bg-gray-50 shadow rounded"
@@ -68,7 +56,7 @@ const jobs = ref([
                 <div
                     :class="[
                         'text-white font-bold text-xs px-2 rounded-sm py-1 shadow-lg relative z-10',
-                        job.type === 'Premium'
+                        job.type === 'premium'
                             ? 'bg-yellow-400'
                             : 'bg-blue-400',
                     ]"
@@ -76,7 +64,7 @@ const jobs = ref([
                     {{ job.type }}
                 </div>
                 <div
-                    v-if="job.type === 'Premium'"
+                    v-if="job.type === 'premium'"
                     class="absolute bottom-0 left-0 w-0 h-0 border-l-[12px] border-t-8 border-l-transparent border-t-yellow-500"
                     style="transform: translate(2px, 8px)"
                 ></div>
@@ -92,7 +80,8 @@ const jobs = ref([
                     <div class="flex-1">
                         <h1 class="font-bold text-2xl">{{ job.title }}</h1>
                         <span class="text-sm text-gray-400"
-                            >Posted 2 weeks ago</span
+                            >Posted
+                            {{ formatRelativeTime(job.created_at) }}</span
                         >
                     </div>
                 </div>
@@ -100,15 +89,19 @@ const jobs = ref([
                     <div class="flex gap-y-2 flex-col flex-1">
                         <span><strong>Job ID:</strong> {{ job.id }}</span>
                         <span
-                            ><strong>Location:</strong> {{ job.location }}</span
+                            ><strong>Location:</strong>
+                            {{ job.location.town }}</span
                         >
-                        <span><strong>Service:</strong> {{ job.service }}</span>
+                        <span
+                            ><strong>Service:</strong>
+                            {{ job.service.name }}</span
+                        >
                     </div>
                     <div class="flex gap-y-2 flex-col flex-1 items-end">
-                        <span><strong>Urgency:</strong> {{ job.urgency }}</span>
+                        <span><strong>Due:</strong> {{ job.urgency }}</span>
                         <span
                             ><strong>Property type:</strong>
-                            {{ job.propertyType }}</span
+                            {{ job.property_type }}</span
                         >
                     </div>
                 </div>

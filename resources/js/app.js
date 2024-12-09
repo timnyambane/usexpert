@@ -33,6 +33,8 @@ import Textarea from "primevue/textarea";
 import ToggleSwitch from "primevue/toggleswitch";
 import Avatar from "primevue/avatar";
 import Rating from "primevue/rating";
+import ProgressSpinner from "primevue/progressspinner";
+import Skeleton from "primevue/skeleton";
 
 const appName = import.meta.env.VITE_APP_NAME;
 
@@ -76,6 +78,8 @@ createInertiaApp({
             .component("ToggleSwitch", ToggleSwitch)
             .component("Avatar", Avatar)
             .component("Rating", Rating)
+            .component("ProgressSpinner", ProgressSpinner)
+            .component("Skeleton", Skeleton)
 
             .mount(el);
     },

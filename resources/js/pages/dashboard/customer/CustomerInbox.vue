@@ -111,13 +111,13 @@ const isSendButtonDisabled = computed(() => {
                     :key="msg.id"
                     class="flex flex-col"
                 >
-                    <!-- Message Text -->
+                    <!-- Message Bubble -->
                     <div
                         class="inline-block px-4 py-2 rounded-lg max-w-[60%] w-auto"
                         :class="{
-                            'bg-primary-400 text-white self-start':
+                            'bg-primary-500 text-white self-start rounded-l-lg':
                                 msg.sender !== 'You',
-                            'bg-gray-200 text-gray-700 self-end':
+                            'bg-gray-200 text-gray-700 self-end rounded-r-lg':
                                 msg.sender === 'You',
                         }"
                     >
@@ -160,4 +160,12 @@ const isSendButtonDisabled = computed(() => {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.rounded-l-lg {
+    border-radius: 12px 12px 12px 0;
+}
+
+.rounded-r-lg {
+    border-radius: 12px 12px 0 12px;
+}
+</style>

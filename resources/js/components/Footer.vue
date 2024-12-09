@@ -27,6 +27,8 @@ const date = new Date().getFullYear();
                     >Register Business</Link
                 >
                 <Link :href="route('home')">Contact Us</Link>
+                <Link :href="route('home')">Blog</Link>
+                <Link :href="route('home')">Directory</Link>
             </ul>
         </div>
         <Divider />

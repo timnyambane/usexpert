@@ -5,7 +5,6 @@ import { customerTabs, businessTabs, adminTabs } from "@/Data.js";
 import DashGreeting from "@/components/DashGreeting.vue";
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
-import MobileDashboard from "@/components/MobileDashboard.vue";
 
 const props = defineProps({
     user: Object,
@@ -38,10 +37,10 @@ const setActiveTab = (index) => {
     <Head title="Dashboard" />
 
     <!-- Desktop display -->
-    <div class="hidden md:flex flex-col h-screen">
+    <div class="flex flex-col h-screen">
         <Navbar :user="user" />
         <div class="px-4 py-6 flex-1">
-            <DashGreeting :user="user" />
+            <DashGreeting :user="user" @jobPosted="refreshJobs" />
 
             <!-- Tabs Section -->
             <div class="w-full max-w-screen-xl mx-auto rounded-lg shadow-lg">
@@ -70,10 +69,6 @@ const setActiveTab = (index) => {
                 </div>
             </div>
         </div>
-        <Footer />
-    </div>
-    <!-- Mobile view -->
-    <div class="flex md:hidden">
-        <MobileDashboard :user="user" />
+        <Footer :user="user" />
     </div>
 </template>

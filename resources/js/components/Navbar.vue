@@ -19,7 +19,9 @@ function logout() {
 </script>
 
 <template>
-    <nav class="flex items-center justify-between py-2 px-10 bg-blue-50 shadow">
+    <nav
+        class="flex items-center justify-between py-2 px-2 lg:px-40 bg-blue-50 shadow"
+    >
         <div class="flex-1 justify-start">
             <Link :href="route('home')">
                 <img

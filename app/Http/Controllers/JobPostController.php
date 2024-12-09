@@ -6,18 +6,22 @@ use App\Models\JobPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Inertia\Inertia;
-
-
+use Carbon\Carbon;
 
 class JobPostController extends Controller
 {
     public function index()
     {
-        $jobPosts = JobPost::with(['user', 'location', 'workCategory', 'service'])->get();
-        return Inertia::render('Dashboard', [
-            'jobs' => $jobPosts,  // Passing the jobs as props to the Inertia component
-        ]);
+        $user = Auth::user();
+        $jobPosts = JobPost::with(['location', 'workCategory', 'service'])
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($jobPost) {
+                $jobPost->urgency = Carbon::parse($jobPost->urgency)->format('j M Y');
+                return $jobPost;
+            });
+        return response()->json($jobPosts);
     }
 
     /**
